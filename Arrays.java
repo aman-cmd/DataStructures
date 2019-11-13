@@ -13,17 +13,14 @@ public class Arrays{
 		}
 		int z = sc.nextInt();
 		for(int i=0;i<n;i++) {
-			for(int j=i;j<n;j++) {
-				int sum = 0;
-				for(int k=i;k<=j;k++) {
-					sum+=arr[k];
-				}
-				if(sum==z) {
-					print(i,j);
-				}else
-				if(sum>z) {
-					break;
-				}
+			int sum = 0;
+			int j = i;
+			while(sum<z&&j<n) {
+				sum+=arr[j];
+				j++;
+			}
+			if(sum==z) {
+				print(i,j-1);
 			}
 		}
 	}
