@@ -9,19 +9,18 @@ public class DLinkedList{
 		}
 	}
 	static Node head = null;
+	static Node tail = null;
 	public static void insert(int data) {
 		Node newNode = new Node(data);
 		if(head==null) {
 			head = newNode;
 			newNode.prev = head;
+			tail = newNode;
 		}
 		else {
-			Node current = head;
-			while(current.next!=null) {
-				current = current.next;
-			}
-			current.next = newNode;
-			newNode.prev = current;
+			tail.next = newNode;
+			newNode.prev = tail;
+			tail = newNode;
 		}
 	}
 	public static void display() {
@@ -34,16 +33,19 @@ public class DLinkedList{
 		System.out.print("null");
 	}
 	public static void printPairs(int k) {
-		Node current = head;
-		while(current.next.next!=null) {
-			Node inner = current.next;
-			while(current.data+inner.data<k) {
-				inner = inner.next;
+		Node start = head;
+		Node end = tail;
+		while(start.data<=end.data) {
+			if(start.data+end.data<k) {
+				start = start.next;
 			}
-			if(current.data+inner.data==k) {
-				System.out.println(current.data+","+inner.data);
+			else if(start.data+end.data>k) {
+				end = end.prev;
 			}
-			current = current.next;
+			else if(start.data+end.data==k) {
+				System.out.println(start.data+", "+end.data);
+				start = start.next;
+			}
 		}
 	}
 	public static void main(String args[]) {
